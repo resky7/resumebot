@@ -1,20 +1,9 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6N3VC8YWED"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-6N3VC8YWED');
-  </script>
   <meta charset="UTF-8">
-  <title>ResumeBot — Telegram бот для резюме</title>
-  <meta name="description" content="Telegram бот, который помогает беженцам и мигрантам создать резюме на литовском, русском и английском.">
-  <meta name="keywords" content="резюме, bot, telegram, CV, Литва, беженцы, работа, мигранты">
+  <title>ResumeBot</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="favicon.ico">
   <style>
     body { font-family: sans-serif; margin: 40px auto; max-width: 600px; padding: 0 20px; }
     h1 { text-align: center; }
@@ -25,48 +14,85 @@
     }
     .section { margin-bottom: 32px; }
     footer { text-align: center; color: #888; margin-top: 40px; }
+    .lang-switcher { text-align: right; font-size: 14px; margin-bottom: 20px; }
   </style>
 </head>
 <body>
-  <h1>ResumeBot</h1>
-  <p>Telegram-бот, который помогает беженцам и мигрантам создать резюме на литовском, русском и английском.</p>
+  <div class="lang-switcher">
+    <button onclick="setLang('ru')">🇷🇺 ru</button>
+    <button onclick="setLang('lt')">🇱🇹 lt</button>
+    <button onclick="setLang('en')">🇬🇧 en</button>
+  </div>
 
-  <a class="btn" href="https://t.me/ResumeLTbot" target="_blank">Запустить бота в Telegram</a>
+  <h1>ResumeBot</h1>
+  <p class="lang ru">Telegram-бот, который помогает беженцам и мигрантам создать резюме на литовском, русском и английском.</p>
+  <p class="lang lt" style="display:none;">Telegram botas, padedantis pabėgėliams ir migrantams sukurti CV lietuvių, rusų ir anglų kalbomis.</p>
+  <p class="lang en" style="display:none;">Telegram bot that helps refugees and migrants create a resume in Lithuanian, Russian, and English.</p>
+
+  <a class="btn" href="https://t.me/ResumeLTbot" target="_blank">
+    <span class="lang ru">Запустить бота в Telegram</span>
+    <span class="lang lt" style="display:none;">Paleisti botą Telegram</span>
+    <span class="lang en" style="display:none;">Start bot in Telegram</span>
+  </a>
 
   <div class="section">
-    <h2>Что умеет бот:</h2>
+    <h2 class="lang ru">Что умеет бот:</h2>
+    <h2 class="lang lt" style="display:none;">Ką moka botas:</h2>
+    <h2 class="lang en" style="display:none;">What the bot can do:</h2>
     <ul>
-      <li>Пошаговая анкета</li>
-      <li>Генерация PDF‑резюме</li>
-      <li>Сохранение в Google‑таблицу</li>
-      <li>Поддержка 🇱🇹 🇷🇺 🇬🇧</li>
+      <li class="lang ru">Пошаговая анкета</li>
+      <li class="lang lt" style="display:none;">Žingsnis po žingsnio anketa</li>
+      <li class="lang en" style="display:none;">Step-by-step form</li>
+
+      <li class="lang ru">Генерация PDF‑резюме</li>
+      <li class="lang lt" style="display:none;">PDF gyvenimo aprašymas</li>
+      <li class="lang en" style="display:none;">PDF resume generation</li>
+
+      <li class="lang ru">Сохранение в Google‑таблицу</li>
+      <li class="lang lt" style="display:none;">Išsaugojimas Google Sheets</li>
+      <li class="lang en" style="display:none;">Save to Google Sheets</li>
+
+      <li>🇱🇹 🇷🇺 🇬🇧</li>
     </ul>
   </div>
 
   <div class="section">
-    <h2>Партнёрам и НКО</h2>
-    <p>
-      Хотите получить доступ к резюме или помочь с трудоустройством? <br>
-      Напишите на <a href="mailto:emilbuiluk7@gmail.com">emilbuiluk7@gmail.com</a> или <a href="https://t.me/reskyyy">@reskyyy</a>.
-    </p>
+    <h2 class="lang ru">Партнёрам и НКО</h2>
+    <h2 class="lang lt" style="display:none;">Partneriams ir NVO</h2>
+    <h2 class="lang en" style="display:none;">For partners and NGOs</h2>
+    <p class="lang ru">Хотите получить доступ к резюме или помочь с трудоустройством?<br> Напишите на <a href="mailto:emilbuiluk7@gmail.com">emilbuiluk7@gmail.com</a> или <a href="https://t.me/reskyyy">@reskyyy</a>.</p>
+    <p class="lang lt" style="display:none;">Norite padėti su įdarbinimu ar gauti prieigą prie CV?<br> Parašykite <a href="mailto:emilbuiluk7@gmail.com">emilbuiluk7@gmail.com</a> arba <a href="https://t.me/reskyyy">@reskyyy</a>.</p>
+    <p class="lang en" style="display:none;">Want to help with employment or get access to CVs?<br> Write to <a href="mailto:emilbuiluk7@gmail.com">emilbuiluk7@gmail.com</a> or <a href="https://t.me/reskyyy">@reskyyy</a>.</p>
   </div>
 
-  <section id="support" style="text-align: center; padding: 40px;">
-    <h2 style="font-size: 24px; margin-bottom: 10px;">Поддержите нас</h2>
-    <p style="font-size: 18px; max-width: 600px; margin: 0 auto 20px;">
-      Помогите нам помогать другим — ваша поддержка помогает нам предоставлять бесплатные резюме беженцам и соискателям.
-    </p>
-    <a href="https://paypal.me/chetresky?country.x=LT&locale.x=ru_RU" target="_blank" style="display: inline-block; background-color: #0070ba; color: white; padding: 12px 24px; font-size: 18px; border-radius: 8px; text-decoration: none;">
-      💙 Поддержать через PayPal
-    </a>
-  </section>
+  <div class="section" style="text-align: center;">
+    <h2 class="lang ru">Поддержите нас</h2>
+    <h2 class="lang lt" style="display:none;">Paremkite mus</h2>
+    <h2 class="lang en" style="display:none;">Support us</h2>
+    <p class="lang ru">Помогите нам помогать другим — ваша поддержка помогает нам предоставлять бесплатные резюме беженцам и соискателям.</p>
+    <p class="lang lt" style="display:none;">Padėkite mums padėti kitiems — jūsų parama leidžia kurti nemokamus CV pabėgėliams ir darbo ieškantiems asmenims.</p>
+    <p class="lang en" style="display:none;">Help us help others — your support allows us to provide free resumes to refugees and job seekers.</p>
+    <a href="https://paypal.me/chetresky" target="_blank" class="btn">💙 PayPal</a>
+  </div>
 
   <div class="section" style="text-align: center;">
-    <h2>Профессиональное резюме</h2>
-    <p>Если вам нужно более детализированное и профессионально оформленное резюме, заполните короткую анкету:</p>
-    <a href="https://forms.gle/62E3aXqVTZkqYNto8" target="_blank" class="btn">📝 Заказать профессиональное резюме</a>
+    <h2 class="lang ru">Профессиональное резюме</h2>
+    <h2 class="lang lt" style="display:none;">Profesionali CV paslauga</h2>
+    <h2 class="lang en" style="display:none;">Professional resume</h2>
+    <p class="lang ru">Если вам нужно более детализированное и профессионально оформленное резюме, заполните короткую анкету:</p>
+    <p class="lang lt" style="display:none;">Jei jums reikia detalesnio ir profesionalaus CV, užpildykite trumpą formą:</p>
+    <p class="lang en" style="display:none;">If you need a more detailed and professionally formatted resume, fill out this short form:</p>
+    <a href="https://forms.gle/62E3aXqVTZkqYNto8" target="_blank" class="btn">📝 Google форма</a>
   </div>
 
   <footer>© 2025 ResumeBot</footer>
+
+  <script>
+    function setLang(lang) {
+      document.querySelectorAll('.lang').forEach(el => {
+        el.style.display = el.classList.contains(lang) ? '' : 'none';
+      });
+    }
+  </script>
 </body>
 </html>

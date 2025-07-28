@@ -15,7 +15,6 @@
     .section { margin-bottom: 32px; }
     footer { text-align: center; color: #888; margin-top: 40px; }
     .lang-switcher { text-align: right; font-size: 14px; margin-bottom: 20px; }
-    .lang { display: none; } /* По умолчанию всё скрыто */
   </style>
 </head>
 <body>
@@ -27,28 +26,14 @@
 
   <h1>ResumeBot</h1>
 
-  <p class="lang ru">Telegram-бот, который помогает беженцам и мигрантам создать резюме на литовском, русском и английском.</p>
-  <p class="lang lt">Telegram botas, padedantis pabėgėliams ir migrantams sukurti CV lietuvių, rusų ir anglų kalbomis.</p>
-  <p class="lang en">Telegram bot that helps refugees and migrants create a resume in Lithuanian, Russian, and English.</p>
+  <p id="description"></p>
 
-  <a class="btn" href="https://t.me/ResumeLTbot" target="_blank">
-    <span class="lang ru">Запустить бота в Telegram</span>
-    <span class="lang lt">Paleisti botą Telegram</span>
-    <span class="lang en">Start bot in Telegram</span>
-  </a>
+  <a class="btn" href="https://t.me/ResumeLTbot" target="_blank" id="start-btn"></a>
 
   <div class="section">
-    <h2 class="lang ru">Нужно профессиональное резюме?</h2>
-    <h2 class="lang lt">Reikia profesionalaus CV?</h2>
-    <h2 class="lang en">Need a professional resume?</h2>
-    <p class="lang ru">Если хотите, чтобы мы оформили резюме за вас — нажмите ниже:</p>
-    <p class="lang lt">Jei norite, kad mes sukurtume jūsų CV — spauskite žemiau:</p>
-    <p class="lang en">If you'd like us to create your resume — click below:</p>
-    <a href="resume-pro.html" class="btn">
-      <span class="lang ru">📝 Заказать профессиональное резюме</span>
-      <span class="lang lt">📝 Užsakyti profesionalų CV</span>
-      <span class="lang en">📝 Order a professional resume</span>
-    </a>
+    <h2 id="pro-title"></h2>
+    <p id="pro-desc"></p>
+    <a href="resume-pro.html" class="btn" id="pro-btn"></a>
   </div>
 
   <div class="section" style="text-align: center;">
@@ -58,14 +43,40 @@
   <footer>© 2025 ResumeBot</footer>
 
   <script>
+    const translations = {
+      ru: {
+        description: "Telegram-бот, который помогает беженцам и мигрантам создать резюме на литовском, русском и английском.",
+        startBtn: "Запустить бота в Telegram",
+        proTitle: "Нужно профессиональное резюме?",
+        proDesc: "Если хотите, чтобы мы оформили резюме за вас — нажмите ниже:",
+        proBtn: "📝 Заказать профессиональное резюме"
+      },
+      lt: {
+        description: "Telegram botas, padedantis pabėgėliams ir migrantams sukurti CV lietuvių, rusų ir anglų kalbomis.",
+        startBtn: "Paleisti botą Telegram",
+        proTitle: "Reikia profesionalaus CV?",
+        proDesc: "Jei norite, kad mes sukurtume jūsų CV — spauskite žemiau:",
+        proBtn: "📝 Užsakyti profesionalų CV"
+      },
+      en: {
+        description: "Telegram bot that helps refugees and migrants create a resume in Lithuanian, Russian, and English.",
+        startBtn: "Start bot in Telegram",
+        proTitle: "Need a professional resume?",
+        proDesc: "If you'd like us to create your resume — click below:",
+        proBtn: "📝 Order a professional resume"
+      }
+    };
+
     function setLang(lang) {
       localStorage.setItem('lang', lang);
-      document.querySelectorAll('.lang').forEach(el => {
-        el.style.display = el.classList.contains(lang) ? '' : 'none';
-      });
+      const t = translations[lang];
+      document.getElementById('description').innerText = t.description;
+      document.getElementById('start-btn').innerText = t.startBtn;
+      document.getElementById('pro-title').innerText = t.proTitle;
+      document.getElementById('pro-desc').innerText = t.proDesc;
+      document.getElementById('pro-btn').innerText = t.proBtn;
     }
 
-    // Установка языка при первой загрузке
     const savedLang = localStorage.getItem('lang') || 'ru';
     setLang(savedLang);
   </script>

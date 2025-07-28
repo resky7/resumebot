@@ -6,52 +6,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="favicon.ico">
   <style>
-    body {
-      font-family: sans-serif;
-      margin: 40px auto;
-      max-width: 600px;
-      padding: 0 20px;
-      background: #f9f9f9;
-      color: #333;
-    }
-    h1, h2 {
-      text-align: center;
-      color: #222;
-    }
+    body { font-family: sans-serif; margin: 40px auto; max-width: 600px; padding: 0 20px; }
+    h1, h2 { text-align: center; }
     .btn {
       display: block;
       margin: 20px auto;
       padding: 12px 24px;
-      background: #0088cc;
+      background: #0070ba;
       color: white;
       text-decoration: none;
       border-radius: 8px;
       text-align: center;
       font-size: 18px;
     }
-    .section {
-      margin-bottom: 32px;
-    }
-    footer {
-      text-align: center;
-      color: #888;
-      margin-top: 40px;
-    }
-    .lang-switcher {
-      text-align: right;
-      font-size: 14px;
-      margin-bottom: 20px;
-    }
-    .lang-switcher button {
-      background: none;
-      border: none;
-      font-size: 16px;
-      cursor: pointer;
-      margin-left: 8px;
-    }
+    .section { margin-bottom: 32px; }
+    footer { text-align: center; color: #888; margin-top: 40px; }
+    .lang-switcher { text-align: right; font-size: 14px; margin-bottom: 20px; }
+    .lang { display: none; }
   </style>
 </head>
 <body>
+
   <div class="lang-switcher">
     <button onclick="setLang('ru')">🇷🇺 ru</button>
     <button onclick="setLang('lt')">🇱🇹 lt</button>
@@ -59,117 +34,90 @@
   </div>
 
   <h1>ResumeBot</h1>
-  <p id="description"></p>
 
-  <a class="btn" href="https://t.me/ResumeLTbot" target="_blank" id="start-btn"></a>
+  <p class="lang ru">Telegram-бот, который помогает беженцам и мигрантам создать резюме на литовском, русском и английском.</p>
+  <p class="lang lt">Telegram botas, padedantis pabėgėliams ir migrantams sukurti CV lietuvių, rusų ir anglų kalbomis.</p>
+  <p class="lang en">Telegram bot that helps refugees and migrants create a resume in Lithuanian, Russian, and English.</p>
+
+  <a class="btn" href="https://t.me/ResumeLTbot" target="_blank">
+    <span class="lang ru">Запустить бота в Telegram</span>
+    <span class="lang lt">Paleisti botą Telegram</span>
+    <span class="lang en">Start bot in Telegram</span>
+  </a>
 
   <div class="section">
-    <h2 id="features-title"></h2>
-    <ul id="features-list"></ul>
+    <h2 class="lang ru">Что умеет бот:</h2>
+    <h2 class="lang lt">Ką moka botas:</h2>
+    <h2 class="lang en">What the bot can do:</h2>
+    <ul>
+      <li class="lang ru">Пошаговая анкета</li>
+      <li class="lang lt">Žingsnis po žingsnio anketa</li>
+      <li class="lang en">Step-by-step form</li>
+
+      <li class="lang ru">Генерация PDF‑резюме</li>
+      <li class="lang lt">PDF gyvenimo aprašymas</li>
+      <li class="lang en">PDF resume generation</li>
+
+      <li class="lang ru">Сохранение в Google‑таблицу</li>
+      <li class="lang lt">Išsaugojimas Google Sheets</li>
+      <li class="lang en">Save to Google Sheets</li>
+
+      <li>🇱🇹 🇷🇺 🇬🇧</li>
+    </ul>
   </div>
 
   <div class="section">
-    <h2 id="partners-title"></h2>
-    <p id="partners-text"></p>
+    <h2 class="lang ru">Партнёрам и НКО</h2>
+    <h2 class="lang lt">Partneriams ir NVO</h2>
+    <h2 class="lang en">For partners and NGOs</h2>
+    <p class="lang ru">Хотите получить доступ к резюме или помочь с трудоустройством?<br> Напишите на <a href="mailto:emilbuiluk7@gmail.com">emilbuiluk7@gmail.com</a> или <a href="https://t.me/reskyyy">@reskyyy</a>.</p>
+    <p class="lang lt">Norite padėti su įdarbinimu ar gauti prieigą prie CV?<br> Parašykite <a href="mailto:emilbuiluk7@gmail.com">emilbuiluk7@gmail.com</a> arba <a href="https://t.me/reskyyy">@reskyyy</a>.</p>
+    <p class="lang en">Want to help with employment or get access to CVs?<br> Write to <a href="mailto:emilbuiluk7@gmail.com">emilbuiluk7@gmail.com</a> or <a href="https://t.me/reskyyy">@reskyyy</a>.</p>
   </div>
 
   <div class="section" style="text-align: center;">
-    <h2 id="support-title"></h2>
-    <p id="support-text"></p>
+    <h2 class="lang ru">Поддержите нас</h2>
+    <h2 class="lang lt">Paremkite mus</h2>
+    <h2 class="lang en">Support us</h2>
+    <p class="lang ru">Помогите нам помогать другим — ваша поддержка помогает нам предоставлять бесплатные резюме беженцам и соискателям.</p>
+    <p class="lang lt">Padėkite mums padėti kitiems — jūsų parama leidžia kurti nemokamus CV pabėgėliams ir darbo ieškantiems asmenims.</p>
+    <p class="lang en">Help us help others — your support allows us to provide free resumes to refugees and job seekers.</p>
     <a href="https://paypal.me/chetresky" target="_blank" class="btn">💙 PayPal</a>
   </div>
 
   <div class="section" style="text-align: center;">
-    <h2 id="pro-title"></h2>
-    <p id="pro-desc"></p>
-    <a href="resume-pro.html" class="btn" id="pro-btn"></a>
+    <h2 class="lang ru">Профессиональное резюме</h2>
+    <h2 class="lang lt">Profesionali CV paslauga</h2>
+    <h2 class="lang en">Professional resume</h2>
+    <p class="lang ru">Если вам нужно более детализированное и профессионально оформленное резюме, заполните короткую анкету:</p>
+    <p class="lang lt">Jei jums reikia detalesnio ir profesionalaus CV, užpildykite trumpą formą:</p>
+    <p class="lang en">If you need a more detailed and professionally formatted resume, fill out this short form:</p>
+    <a class="btn" href="resume-pro.html">📝 Google форма</a>
+  </div>
+
+  <!-- Тариф Плюс -->
+  <div class="section" style="text-align: center;">
+    <h2 class="lang ru">Тариф «Плюс» за 15€</h2>
+    <h2 class="lang lt">„Plus“ planas už 15 €</h2>
+    <h2 class="lang en">Plus Plan — 15€</h2>
+    <p class="lang ru">Мы сделаем всё за вас: оформление, рекомендации и финальный PDF-файл. Быстро, профессионально и удобно.</p>
+    <p class="lang lt">Mes viską padarysime už jus: formavimas, patarimai ir galutinis PDF. Greitai, profesionaliai, patogiai.</p>
+    <p class="lang en">We’ll do everything for you: layout, suggestions, and final PDF. Fast, professional, easy.</p>
+    <a class="btn" href="plus.html">🚀 Заказать тариф «Плюс»</a>
+    <a class="btn" href="https://paypal.me/chetresky" target="_blank">💳 Оплатить через PayPal</a>
   </div>
 
   <footer>© 2025 ResumeBot</footer>
 
   <script>
-    const translations = {
-      ru: {
-        description: "Telegram-бот, который помогает беженцам и мигрантам создать резюме на литовском, русском и английском.",
-        startBtn: "Запустить бота в Telegram",
-        featuresTitle: "Что умеет бот:",
-        features: [
-          "Пошаговая анкета",
-          "Генерация PDF‑резюме",
-          "Сохранение в Google‑таблицу",
-          "🇱🇹 🇷🇺 🇬🇧"
-        ],
-        partnersTitle: "Партнёрам и НКО",
-        partnersText: 'Хотите получить доступ к резюме или помочь с трудоустройством?<br> Напишите на <a href="mailto:emilbuiluk7@gmail.com">emilbuiluk7@gmail.com</a> или <a href="https://t.me/reskyyy">@reskyyy</a>.',
-        supportTitle: "Поддержите нас",
-        supportText: "Помогите нам помогать другим — ваша поддержка помогает нам предоставлять бесплатные резюме беженцам и соискателям.",
-        proTitle: "Нужно профессиональное резюме?",
-        proDesc: "Если хотите, чтобы мы оформили резюме за вас — нажмите ниже:",
-        proBtn: "📝 Заказать профессиональное резюме"
-      },
-      lt: {
-        description: "Telegram botas, padedantis pabėgėliams ir migrantams sukurti CV lietuvių, rusų ir anglų kalbomis.",
-        startBtn: "Paleisti botą Telegram",
-        featuresTitle: "Ką moka botas:",
-        features: [
-          "Žingsnis po žingsnio anketa",
-          "PDF gyvenimo aprašymas",
-          "Išsaugojimas Google Sheets",
-          "🇱🇹 🇷🇺 🇬🇧"
-        ],
-        partnersTitle: "Partneriams ir NVO",
-        partnersText: 'Norite padėti su įdarbinimu ar gauti prieigą prie CV?<br> Parašykite <a href="mailto:emilbuiluk7@gmail.com">emilbuiluk7@gmail.com</a> arba <a href="https://t.me/reskyyy">@reskyyy</a>.',
-        supportTitle: "Paremkite mus",
-        supportText: "Padėkite mums padėti kitiems — jūsų parama leidžia kurti nemokamus CV pabėgėliams ir darbo ieškantiems asmenims.",
-        proTitle: "Reikia profesionalaus CV?",
-        proDesc: "Jei norite, kad mes sukurtume jūsų CV — spauskite žemiau:",
-        proBtn: "📝 Užsakyti profesionalų CV"
-      },
-      en: {
-        description: "Telegram bot that helps refugees and migrants create a resume in Lithuanian, Russian, and English.",
-        startBtn: "Start bot in Telegram",
-        featuresTitle: "What the bot can do:",
-        features: [
-          "Step-by-step form",
-          "PDF resume generation",
-          "Save to Google Sheets",
-          "🇱🇹 🇷🇺 🇬🇧"
-        ],
-        partnersTitle: "For partners and NGOs",
-        partnersText: 'Want to help with employment or get access to CVs?<br> Write to <a href="mailto:emilbuiluk7@gmail.com">emilbuiluk7@gmail.com</a> or <a href="https://t.me/reskyyy">@reskyyy</a>.',
-        supportTitle: "Support us",
-        supportText: "Help us help others — your support allows us to provide free resumes to refugees and job seekers.",
-        proTitle: "Need a professional resume?",
-        proDesc: "If you'd like us to create your resume — click below:",
-        proBtn: "📝 Order a professional resume"
-      }
-    };
-
     function setLang(lang) {
-      localStorage.setItem('lang', lang);
-      const t = translations[lang];
-      document.getElementById('description').innerText = t.description;
-      document.getElementById('start-btn').innerText = t.startBtn;
-      document.getElementById('features-title').innerText = t.featuresTitle;
-
-      const list = document.getElementById('features-list');
-      list.innerHTML = '';
-      t.features.forEach(item => {
-        const li = document.createElement('li');
-        li.textContent = item;
-        list.appendChild(li);
+      document.querySelectorAll('.lang').forEach(el => {
+        el.style.display = el.classList.contains(lang) ? '' : 'none';
       });
-
-      document.getElementById('partners-title').innerText = t.partnersTitle;
-      document.getElementById('partners-text').innerHTML = t.partnersText;
-      document.getElementById('support-title').innerText = t.supportTitle;
-      document.getElementById('support-text').innerText = t.supportText;
-      document.getElementById('pro-title').innerText = t.proTitle;
-      document.getElementById('pro-desc').innerText = t.proDesc;
-      document.getElementById('pro-btn').innerText = t.proBtn;
+      localStorage.setItem("lang", lang);
     }
 
-    const savedLang = localStorage.getItem('lang') || 'ru';
+    const savedLang = localStorage.getItem("lang") || "ru";
     setLang(savedLang);
   </script>
 </body>

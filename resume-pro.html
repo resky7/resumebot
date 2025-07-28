@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Заказать профессиональное резюме — ResumeBot</title>
+  <title>ResumeBot — Профессиональное резюме</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="favicon.ico">
   <style>
@@ -25,47 +25,59 @@
       border: none;
     }
     .lang { display: none; }
+    .lang-switcher {
+      text-align: right;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+    footer { text-align: center; color: #888; margin-top: 40px; }
   </style>
 </head>
 <body>
 
-  <!-- Русский -->
+  <div class="lang-switcher">
+    <button onclick="setLang('ru')">🇷🇺 ru</button>
+    <button onclick="setLang('lt')">🇱🇹 lt</button>
+    <button onclick="setLang('en')">🇬🇧 en</button>
+  </div>
+
+  <!-- RU -->
   <div class="lang ru">
     <h1>Профессиональное резюме</h1>
     <p style="text-align:center;">Мы сделаем за вас — оформим профессиональное резюме с акцентом на сильные стороны. Вы получите PDF и советы по улучшению.</p>
     <h2>Заполните анкету:</h2>
   </div>
 
-  <!-- Литовский -->
+  <!-- LT -->
   <div class="lang lt">
     <h1>Profesionali gyvenimo aprašymo paslauga</h1>
     <p style="text-align:center;">Mes paruošime už jus – suformuosime profesionalų CV, išryškindami stipriąsias puses. Gausite PDF ir patarimus tobulinimui.</p>
     <h2>Užpildykite formą:</h2>
   </div>
 
-  <!-- Английский -->
+  <!-- EN -->
   <div class="lang en">
     <h1>Professional Resume Service</h1>
     <p style="text-align:center;">We’ll create your professional resume — focusing on your strengths. You'll receive a polished PDF and improvement tips.</p>
     <h2>Fill out the form:</h2>
   </div>
 
-  <!-- Форма — одинакова для всех -->
+  <!-- Форма -->
   <iframe src="https://forms.gle/62E3aXqVTZkqYNto8" allowfullscreen></iframe>
 
   <!-- Кнопка назад -->
   <a class="btn" href="index.html">⬅ Назад / Back</a>
 
-  <footer style="text-align: center; color: #888; margin-top: 40px;">© 2025 ResumeBot</footer>
+  <footer>© 2025 ResumeBot</footer>
 
   <script>
     function setLang(lang) {
+      localStorage.setItem("lang", lang);
       document.querySelectorAll('.lang').forEach(el => {
         el.style.display = el.classList.contains(lang) ? '' : 'none';
       });
     }
 
-    // Получить язык из localStorage (если не задан, будет "ru")
     const lang = localStorage.getItem("lang") || "ru";
     setLang(lang);
   </script>

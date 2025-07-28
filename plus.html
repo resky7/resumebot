@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Тариф Плюс — ResumeBot</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon.ico">
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: 40px auto; padding: 0 20px; }
+    h1, h2 { text-align: center; }
+    p { text-align: center; }
+    .btn {
+      display: block;
+      margin: 20px auto;
+      padding: 12px 24px;
+      background: #0070ba;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 18px;
+      text-align: center;
+    }
+    .lang { display: none; }
+    footer { text-align: center; color: #888; margin-top: 40px; }
+  </style>
+</head>
+<body>
+
+  <!-- Русский -->
+  <div class="lang ru">
+    <h1>Тариф «Плюс»</h1>
+    <p>Цена: <strong>15 €</strong></p>
+    <p>Вы получите профессиональное резюме в PDF с акцентом на ваши сильные стороны и советы по улучшению.</p>
+    <ul>
+      <li>✅ Индивидуальный подход</li>
+      <li>✅ PDF-файл готов к отправке</li>
+      <li>✅ Одна бесплатная правка</li>
+      <li>⏱ До 24 часов</li>
+    </ul>
+    <a class="btn" href="https://paypal.me/chetresky" target="_blank">💳 Оплатить через PayPal</a>
+    <a class="btn" href="resume-pro.html">📄 Перейти к анкете</a>
+  </div>
+
+  <!-- Литовский -->
+  <div class="lang lt">
+    <h1>„Plus“ planas</h1>
+    <p>Kaina: <strong>15 €</strong></p>
+    <p>Gausite profesionalų CV PDF formatu, išryškinant stipriąsias puses ir patarimus tobulinimui.</p>
+    <ul>
+      <li>✅ Individualus požiūris</li>
+      <li>✅ Paruoštas PDF failas</li>
+      <li>✅ Vienas nemokamas pataisymas</li>
+      <li>⏱ Iki 24 valandų</li>
+    </ul>
+    <a class="btn" href="https://paypal.me/chetresky" target="_blank">💳 Sumokėti per PayPal</a>
+    <a class="btn" href="resume-pro.html">📄 Užpildyti formą</a>
+  </div>
+
+  <!-- Английский -->
+  <div class="lang en">
+    <h1>Plus Plan</h1>
+    <p>Price: <strong>15 €</strong></p>
+    <p>You will receive a professional PDF resume focused on your strengths and improvement tips.</p>
+    <ul>
+      <li>✅ Personalized approach</li>
+      <li>✅ Ready-to-send PDF file</li>
+      <li>✅ One free revision</li>
+      <li>⏱ Within 24 hours</li>
+    </ul>
+    <a class="btn" href="https://paypal.me/chetresky" target="_blank">💳 Pay with PayPal</a>
+    <a class="btn" href="resume-pro.html">📄 Fill out the form</a>
+  </div>
+
+  <a class="btn" href="index.html">⬅ Назад / Back</a>
+  <footer>© 2025 ResumeBot</footer>
+
+  <script>
+    function setLang(lang) {
+      document.querySelectorAll('.lang').forEach(el => {
+        el.style.display = el.classList.contains(lang) ? '' : 'none';
+      });
+    }
+    const lang = localStorage.getItem("lang") || "ru";
+    setLang(lang);
+  </script>
+</body>
+</html>

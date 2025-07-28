@@ -118,5 +118,17 @@
     const savedLang = localStorage.getItem("lang") || "ru";
     setLang(savedLang);
   </script>
+  <script>
+  function setLang(lang) {
+    localStorage.setItem("lang", lang);
+    document.querySelectorAll('.lang').forEach(el => {
+      el.style.display = el.classList.contains(lang) ? '' : 'none';
+    });
+  }
+
+  // ВАЖНО: При первом открытии выбираем ru как язык по умолчанию
+  const savedLang = localStorage.getItem("lang") || "ru";
+  setLang(savedLang);
+</script>
 </body>
 </html>

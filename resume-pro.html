@@ -24,17 +24,51 @@
       height: 800px;
       border: none;
     }
+    .lang { display: none; }
   </style>
 </head>
 <body>
-  <h1>Профессиональное резюме</h1>
-  <p style="text-align:center;">Мы сделаем за вас — оформим профессиональное резюме с акцентом на сильные стороны. Вы получите PDF и советы по улучшению.</p>
 
-  <h2>Заполните анкету:</h2>
+  <!-- Русский -->
+  <div class="lang ru">
+    <h1>Профессиональное резюме</h1>
+    <p style="text-align:center;">Мы сделаем за вас — оформим профессиональное резюме с акцентом на сильные стороны. Вы получите PDF и советы по улучшению.</p>
+    <h2>Заполните анкету:</h2>
+  </div>
+
+  <!-- Литовский -->
+  <div class="lang lt">
+    <h1>Profesionali gyvenimo aprašymo paslauga</h1>
+    <p style="text-align:center;">Mes paruošime už jus – suformuosime profesionalų CV, išryškindami stipriąsias puses. Gausite PDF ir patarimus tobulinimui.</p>
+    <h2>Užpildykite formą:</h2>
+  </div>
+
+  <!-- Английский -->
+  <div class="lang en">
+    <h1>Professional Resume Service</h1>
+    <p style="text-align:center;">We’ll create your professional resume — focusing on your strengths. You'll receive a polished PDF and improvement tips.</p>
+    <h2>Fill out the form:</h2>
+  </div>
+
+  <!-- Форма — одинакова для всех -->
   <iframe src="https://forms.gle/62E3aXqVTZkqYNto8" allowfullscreen></iframe>
 
-  <a class="btn" href="index.html">⬅ Вернуться на главную</a>
+  <!-- Кнопка назад -->
+  <a class="btn" href="index.html">⬅ Назад / Back</a>
 
   <footer style="text-align: center; color: #888; margin-top: 40px;">© 2025 ResumeBot</footer>
+
+  <script>
+    function setLang(lang) {
+      document.querySelectorAll('.lang').forEach(el => {
+        el.style.display = el.classList.contains(lang) ? '' : 'none';
+      });
+    }
+
+    // Получить язык из localStorage (если не задан, будет "ru")
+    const lang = localStorage.getItem("lang") || "ru";
+    setLang(lang);
+  </script>
+
 </body>
 </html>

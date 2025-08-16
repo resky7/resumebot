@@ -27,6 +27,7 @@
 </head>
 <body>
 
+  <!-- Переключение языков -->
   <div class="lang-switcher">
     <button onclick="setLang('ru')">🇷🇺 ru</button>
     <button onclick="setLang('lt')">🇱🇹 lt</button>
@@ -35,16 +36,19 @@
 
   <h1>ResumeBot</h1>
 
+  <!-- Описание -->
   <p class="lang ru">Telegram-бот, который помогает беженцам и мигрантам создать резюме на литовском, русском и английском.</p>
   <p class="lang lt">Telegram botas, padedantis pabėgėliams ir migrantams sukurti CV lietuvių, rusų ir anglų kalbomis.</p>
   <p class="lang en">Telegram bot that helps refugees and migrants create a resume in Lithuanian, Russian, and English.</p>
 
+  <!-- Кнопка запуска бота -->
   <a class="btn" href="https://t.me/ResumeLTbot" target="_blank">
     <span class="lang ru">Запустить бота в Telegram</span>
     <span class="lang lt">Paleisti botą Telegram</span>
     <span class="lang en">Start bot in Telegram</span>
   </a>
 
+  <!-- Что умеет бот -->
   <div class="section">
     <h2 class="lang ru">Что умеет бот:</h2>
     <h2 class="lang lt">Ką moka botas:</h2>
@@ -66,6 +70,7 @@
     </ul>
   </div>
 
+  <!-- Для партнёров -->
   <div class="section">
     <h2 class="lang ru">Партнёрам и НКО</h2>
     <h2 class="lang lt">Partneriams ir NVO</h2>
@@ -75,6 +80,7 @@
     <p class="lang en">Want to help with employment or get access to CVs?<br> Write to <a href="mailto:emilbuiluk7@gmail.com">emilbuiluk7@gmail.com</a> or <a href="https://t.me/reskyyy">@reskyyy</a>.</p>
   </div>
 
+  <!-- Поддержка -->
   <div class="section" style="text-align: center;">
     <h2 class="lang ru">Поддержите нас</h2>
     <h2 class="lang lt">Paremkite mus</h2>
@@ -85,22 +91,23 @@
     <a href="https://paypal.me/chetresky" target="_blank" class="btn">💙 PayPal</a>
   </div>
 
+  <!-- Профессиональное резюме -->
   <div class="section" style="text-align: center;">
     <h2 class="lang ru">Профессиональное резюме</h2>
     <h2 class="lang lt">Profesionali CV paslauga</h2>
     <h2 class="lang en">Professional resume</h2>
-    <p class="lang ru">Если вам нужно более детализированное и профессионально оформленное резюме, заполните короткую анкету:</p>
+    <p class="lang ru">Если нужно более детализированное и профессионально оформленное резюме, заполните короткую анкету:</p>
     <p class="lang lt">Jei jums reikia detalesnio ir profesionalaus CV, užpildykite trumpą formą:</p>
     <p class="lang en">If you need a more detailed and professionally formatted resume, fill out this short form:</p>
     <a class="btn" href="resume-pro.html">📝 Google форма</a>
   </div>
 
-  <!-- Тариф Плюс -->
+  <!-- Тариф Plus -->
   <div class="section" style="text-align: center;">
     <h2 class="lang ru">Тариф «Плюс» за 15€</h2>
     <h2 class="lang lt">„Plus“ planas už 15 €</h2>
     <h2 class="lang en">Plus Plan — 15€</h2>
-    <p class="lang ru">Мы сделаем всё за вас: оформление, рекомендации и финальный PDF-файл. Быстро, профессионально и удобно.</p>
+    <p class="lang ru">Мы сделаем всё за вас: оформление, рекомендации и финальный PDF. Быстро, профессионально и удобно.</p>
     <p class="lang lt">Mes viską padarysime už jus: formavimas, patarimai ir galutinis PDF. Greitai, profesionaliai, patogiai.</p>
     <p class="lang en">We’ll do everything for you: layout, suggestions, and final PDF. Fast, professional, easy.</p>
     <a class="btn" href="plus.html">🚀 Заказать тариф «Плюс»</a>
@@ -120,5 +127,6 @@
     const savedLang = localStorage.getItem("lang") || "ru";
     setLang(savedLang);
   </script>
+
 </body>
 </html>

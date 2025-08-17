@@ -2,131 +2,144 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>ResumeBot</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="favicon.ico">
+  <title>ResumeBot</title>
   <style>
-    body { font-family: sans-serif; margin: 40px auto; max-width: 600px; padding: 0 20px; }
-    h1, h2 { text-align: center; }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    h1 {
+      margin-top: 20px;
+      color: #fff;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      padding: 20px;
+    }
     .btn {
       display: block;
-      margin: 20px auto;
-      padding: 12px 24px;
-      background: #0070ba;
+      background-color: #007bff;
       color: white;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 10px;
       text-decoration: none;
-      border-radius: 8px;
-      text-align: center;
       font-size: 18px;
+      transition: 0.3s;
     }
-    .section { margin-bottom: 32px; }
-    footer { text-align: center; color: #888; margin-top: 40px; }
-    .lang-switcher { text-align: right; font-size: 14px; margin-bottom: 20px; }
-    .lang { display: none; }
+    .btn:hover {
+      background-color: #0056b3;
+    }
+    .lang-switch {
+      margin: 20px 0;
+    }
+    .lang-btn {
+      margin: 0 5px;
+      padding: 5px 10px;
+      background: #333;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .footer {
+      margin-top: 40px;
+      font-size: 14px;
+      color: #888;
+    }
+    .section {
+      margin: 30px 0;
+    }
   </style>
 </head>
 <body>
+  <div class="container">
+    <h1 id="title">ResumeBot</h1>
 
-  <!-- Переключение языков -->
-  <div class="lang-switcher">
-    <button onclick="setLang('ru')">🇷🇺 ru</button>
-    <button onclick="setLang('lt')">🇱🇹 lt</button>
-    <button onclick="setLang('en')">🇬🇧 en</button>
+    <!-- Переключение языков -->
+    <div class="lang-switch">
+      <button class="lang-btn" onclick="setLang('lt')">LT</button>
+      <button class="lang-btn" onclick="setLang('ru')">RU</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+
+    <!-- О сервисе -->
+    <div class="section">
+      <h2 id="about-title"></h2>
+      <p id="about-text"></p>
+    </div>
+
+    <!-- Оплата -->
+    <div class="section">
+      <h2 id="payment-title"></h2>
+      <a href="https://paypal.me/chetresky" class="btn" target="_blank">💳 <span id="btn-paypal"></span></a>
+      <a href="https://forms.gle/" class="btn" target="_blank">📝 <span id="btn-form"></span></a>
+      <a href="https://paypal.me/chetresky" class="btn" target="_blank">🚀 <span id="btn-plus"></span></a>
+    </div>
+
+    <!-- Контакты -->
+    <div class="section">
+      <h2 id="contact-title"></h2>
+      <p id="contact-text"></p>
+      <p>📩 <a href="mailto:resky.sup01@gmail.com" style="color:#00aaff">resky.sup01@gmail.com</a></p>
+    </div>
+
+    <div class="footer">© 2025 ResumeBot</div>
   </div>
-
-  <h1>ResumeBot</h1>
-
-  <!-- Описание -->
-  <p class="lang ru">Telegram-бот, который помогает беженцам и мигрантам создать резюме на литовском, русском и английском.</p>
-  <p class="lang lt">Telegram botas, padedantis pabėgėliams ir migrantams sukurti CV lietuvių, rusų ir anglų kalbomis.</p>
-  <p class="lang en">Telegram bot that helps refugees and migrants create a resume in Lithuanian, Russian, and English.</p>
-
-  <!-- Кнопка запуска бота -->
-  <a class="btn" href="https://t.me/ResumeLTbot" target="_blank">
-    <span class="lang ru">Запустить бота в Telegram</span>
-    <span class="lang lt">Paleisti botą Telegram</span>
-    <span class="lang en">Start bot in Telegram</span>
-  </a>
-
-  <!-- Что умеет бот -->
-  <div class="section">
-    <h2 class="lang ru">Что умеет бот:</h2>
-    <h2 class="lang lt">Ką moka botas:</h2>
-    <h2 class="lang en">What the bot can do:</h2>
-    <ul>
-      <li class="lang ru">Пошаговая анкета</li>
-      <li class="lang lt">Žingsnis po žingsnio anketa</li>
-      <li class="lang en">Step-by-step form</li>
-
-      <li class="lang ru">Генерация PDF‑резюме</li>
-      <li class="lang lt">PDF gyvenimo aprašymas</li>
-      <li class="lang en">PDF resume generation</li>
-
-      <li class="lang ru">Сохранение в Google‑таблицу</li>
-      <li class="lang lt">Išsaugojimas Google Sheets</li>
-      <li class="lang en">Save to Google Sheets</li>
-
-      <li>🇱🇹 🇷🇺 🇬🇧</li>
-    </ul>
-  </div>
-
-  <!-- Для партнёров -->
-  <div class="section">
-    <h2 class="lang ru">Партнёрам и НКО</h2>
-    <h2 class="lang lt">Partneriams ir NVO</h2>
-    <h2 class="lang en">For partners and NGOs</h2>
-    <p class="lang ru">Хотите получить доступ к резюме или помочь с трудоустройством?<br> Напишите на <a href="mailto:emilbuiluk7@gmail.com">emilbuiluk7@gmail.com</a> или <a href="https://t.me/reskyyy">@reskyyy</a>.</p>
-    <p class="lang lt">Norite padėti su įdarbinimu ar gauti prieigą prie CV?<br> Parašykite <a href="mailto:emilbuiluk7@gmail.com">emilbuiluk7@gmail.com</a> arba <a href="https://t.me/reskyyy">@reskyyy</a>.</p>
-    <p class="lang en">Want to help with employment or get access to CVs?<br> Write to <a href="mailto:emilbuiluk7@gmail.com">emilbuiluk7@gmail.com</a> or <a href="https://t.me/reskyyy">@reskyyy</a>.</p>
-  </div>
-
-  <!-- Поддержка -->
-  <div class="section" style="text-align: center;">
-    <h2 class="lang ru">Поддержите нас</h2>
-    <h2 class="lang lt">Paremkite mus</h2>
-    <h2 class="lang en">Support us</h2>
-    <p class="lang ru">Помогите нам помогать другим — ваша поддержка помогает нам предоставлять бесплатные резюме беженцам и соискателям.</p>
-    <p class="lang lt">Padėkite mums padėti kitiems — jūsų parama leidžia kurti nemokamus CV pabėgėliams ir darbo ieškantiems asmenims.</p>
-    <p class="lang en">Help us help others — your support allows us to provide free resumes to refugees and job seekers.</p>
-    <a href="https://paypal.me/chetresky" target="_blank" class="btn">💙 PayPal</a>
-  </div>
-
-  <!-- Профессиональное резюме -->
-  <div class="section" style="text-align: center;">
-    <h2 class="lang ru">Профессиональное резюме</h2>
-    <h2 class="lang lt">Profesionali CV paslauga</h2>
-    <h2 class="lang en">Professional resume</h2>
-    <p class="lang ru">Если нужно более детализированное и профессионально оформленное резюме, заполните короткую анкету:</p>
-    <p class="lang lt">Jei jums reikia detalesnio ir profesionalaus CV, užpildykite trumpą formą:</p>
-    <p class="lang en">If you need a more detailed and professionally formatted resume, fill out this short form:</p>
-    <a class="btn" href="resume-pro.html">📝 Google форма</a>
-  </div>
-
-  <!-- Тариф Plus -->
-  <div class="section" style="text-align: center;">
-    <h2 class="lang ru">Тариф «Плюс» за 15€</h2>
-    <h2 class="lang lt">„Plus“ planas už 15 €</h2>
-    <h2 class="lang en">Plus Plan — 15€</h2>
-    <p class="lang ru">Мы сделаем всё за вас: оформление, рекомендации и финальный PDF. Быстро, профессионально и удобно.</p>
-    <p class="lang lt">Mes viską padarysime už jus: formavimas, patarimai ir galutinis PDF. Greitai, profesionaliai, patogiai.</p>
-    <p class="lang en">We’ll do everything for you: layout, suggestions, and final PDF. Fast, professional, easy.</p>
-    <a class="btn" href="plus.html">🚀 Заказать тариф «Плюс»</a>
-    <a class="btn" href="https://paypal.me/chetresky" target="_blank">💳 Оплатить через PayPal</a>
-  </div>
-
-  <footer>© 2025 ResumeBot</footer>
 
   <script>
+    const content = {
+      lt: {
+        aboutTitle: "Apie ResumeBot",
+        aboutText: "ResumeBot padeda jums sukurti profesionalų gyvenimo aprašymą vos per kelias minutes. Pasirinkite kalbą, užpildykite formą ir gaukite paruoštą CV.",
+        paymentTitle: "Kaip sumokėti",
+        btnPaypal: "Apmokėti per PayPal",
+        btnForm: "Užpildyti Google formą",
+        btnPlus: "Užsisakyti planą „Plius“",
+        contactTitle: "Kontaktai",
+        contactText: "Jeigu turite klausimų – susisiekite su mumis el. paštu."
+      },
+      ru: {
+        aboutTitle: "О ResumeBot",
+        aboutText: "ResumeBot помогает создать профессиональное резюме всего за несколько минут. Выберите язык, заполните форму и получите готовое CV.",
+        paymentTitle: "Как оплатить",
+        btnPaypal: "Оплатить через PayPal",
+        btnForm: "Заполнить Google форму",
+        btnPlus: "Заказать тариф «Плюс»",
+        contactTitle: "Контакты",
+        contactText: "Если у вас есть вопросы – пишите нам на почту."
+      },
+      en: {
+        aboutTitle: "About ResumeBot",
+        aboutText: "ResumeBot helps you create a professional resume in just a few minutes. Choose your language, fill out the form, and get your CV ready.",
+        paymentTitle: "How to Pay",
+        btnPaypal: "Pay via PayPal",
+        btnForm: "Fill Google Form",
+        btnPlus: "Order 'Plus' Plan",
+        contactTitle: "Contacts",
+        contactText: "If you have any questions – feel free to email us."
+      }
+    };
+
     function setLang(lang) {
-      document.querySelectorAll('.lang').forEach(el => {
-        el.style.display = el.classList.contains(lang) ? '' : 'none';
-      });
-      localStorage.setItem("lang", lang);
+      document.getElementById("about-title").innerText = content[lang].aboutTitle;
+      document.getElementById("about-text").innerText = content[lang].aboutText;
+      document.getElementById("payment-title").innerText = content[lang].paymentTitle;
+      document.getElementById("btn-paypal").innerText = content[lang].btnPaypal;
+      document.getElementById("btn-form").innerText = content[lang].btnForm;
+      document.getElementById("btn-plus").innerText = content[lang].btnPlus;
+      document.getElementById("contact-title").innerText = content[lang].contactTitle;
+      document.getElementById("contact-text").innerText = content[lang].contactText;
     }
 
-    const savedLang = localStorage.getItem("lang") || "ru";
-    setLang(savedLang);
+    // Стартовый язык (RU)
+    setLang("ru");
   </script>
-
 </body>
 </html>

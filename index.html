@@ -3,36 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ResumeBot — Сделай резюме за 1 минуту</title>
+  <title>ResumeBot — Создай резюме за 1 минуту</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       background: #f9fafb;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
       margin: 0;
+      padding: 0;
+      text-align: center;
       color: #333;
     }
-    .card {
-      background: #fff;
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-      text-align: center;
-      max-width: 400px;
+    header {
+      padding: 20px;
+      background: #111;
+      color: white;
+    }
+    .lang-switch {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+    .lang-switch button {
+      margin-left: 10px;
+      padding: 5px 10px;
+      border: none;
+      background: #0070ba;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .section {
+      padding: 50px 20px;
     }
     h1 {
+      font-size: 32px;
       margin-bottom: 10px;
-      color: #111;
     }
-    p {
-      margin-bottom: 20px;
+    h2 {
+      margin: 20px 0 10px;
+    }
+    .steps {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .step {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      width: 250px;
     }
     .btn {
       display: inline-block;
+      margin-top: 20px;
       padding: 15px 25px;
       font-size: 18px;
       background: #0070ba;
@@ -45,19 +70,91 @@
     .btn:hover {
       background: #005a99;
     }
-    .note {
-      margin-top: 15px;
+    footer {
+      margin-top: 40px;
+      padding: 20px;
+      background: #f1f1f1;
       font-size: 14px;
-      color: #555;
     }
   </style>
 </head>
 <body>
-  <div class="card">
-    <h1>ResumeBot</h1>
-    <p>Сделайте профессиональное резюме всего за <b>5 €</b>.</p>
-    <a href="https://paypal.me/chetresky/5" class="btn">Оплатить 5 €</a>
-    <p class="note">После оплаты вернитесь в Telegram-бота: <br> <a href="https://t.me/YourBot">Открыть бота</a></p>
+  <header>
+    <h1 id="title">ResumeBot — Создай резюме за 1 минуту</h1>
+    <div class="lang-switch">
+      <button onclick="setLang('ru')">RU</button>
+      <button onclick="setLang('lt')">LT</button>
+      <button onclick="setLang('en')">EN</button>
+    </div>
+  </header>
+
+  <div class="section">
+    <h2 id="how-title">Как это работает?</h2>
+    <div class="steps">
+      <div class="step" id="step1">1. Заполните данные</div>
+      <div class="step" id="step2">2. Оплатите 5 €</div>
+      <div class="step" id="step3">3. Получите PDF-резюме в боте</div>
+    </div>
   </div>
+
+  <div class="section">
+    <h2 id="price-title">Цена — всего 5 €</h2>
+    <a href="https://paypal.me/chetresky/5" class="btn" id="pay-btn">Оплатить</a>
+    <p><a href="https://t.me/YourBot" class="btn" style="background:#28a745" id="bot-btn">Перейти в бота</a></p>
+  </div>
+
+  <footer>
+    <p id="contact">Контакты: resky.sup01@gmail.com</p>
+  </footer>
+
+  <script>
+    const langData = {
+      ru: {
+        title: "ResumeBot — Создай резюме за 1 минуту",
+        how: "Как это работает?",
+        step1: "1. Заполните данные",
+        step2: "2. Оплатите 5 €",
+        step3: "3. Получите PDF-резюме в боте",
+        price: "Цена — всего 5 €",
+        pay: "Оплатить",
+        bot: "Перейти в бота",
+        contact: "Контакты: resky.sup01@gmail.com"
+      },
+      lt: {
+        title: "ResumeBot — Sukurk CV per 1 minutę",
+        how: "Kaip tai veikia?",
+        step1: "1. Užpildykite duomenis",
+        step2: "2. Sumokėkite 5 €",
+        step3: "3. Gaukite PDF CV per botą",
+        price: "Kaina — tik 5 €",
+        pay: "Apmokėti",
+        bot: "Atidaryti botą",
+        contact: "Kontaktai: resky.sup01@gmail.com"
+      },
+      en: {
+        title: "ResumeBot — Create a CV in 1 minute",
+        how: "How it works?",
+        step1: "1. Fill in your details",
+        step2: "2. Pay 5 €",
+        step3: "3. Get PDF CV in the bot",
+        price: "Price — only 5 €",
+        pay: "Pay Now",
+        bot: "Open Bot",
+        contact: "Contact: resky.sup01@gmail.com"
+      }
+    };
+
+    function setLang(lang) {
+      document.getElementById("title").innerText = langData[lang].title;
+      document.getElementById("how-title").innerText = langData[lang].how;
+      document.getElementById("step1").innerText = langData[lang].step1;
+      document.getElementById("step2").innerText = langData[lang].step2;
+      document.getElementById("step3").innerText = langData[lang].step3;
+      document.getElementById("price-title").innerText = langData[lang].price;
+      document.getElementById("pay-btn").innerText = langData[lang].pay;
+      document.getElementById("bot-btn").innerText = langData[lang].bot;
+      document.getElementById("contact").innerText = langData[lang].contact;
+    }
+  </script>
 </body>
 </html>

@@ -2,201 +2,62 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>ResumeBot — создание резюме</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="favicon.ico">
+  <title>ResumeBot — Сделай резюме за 1 минуту</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
+      font-family: Arial, sans-serif;
+      background: #f9fafb;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
       margin: 0;
-      padding: 0;
-      background: #f4f6f9;
       color: #333;
     }
-    header {
-      text-align: center;
-      padding: 40px 20px 20px;
-      background: #0088cc;
-      color: white;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 2rem;
-    }
-    .lang-switch {
-      margin-top: 15px;
-    }
-    .lang-switch button {
-      background: white;
-      border: none;
-      color: #0088cc;
-      padding: 8px 14px;
-      margin: 0 4px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 600;
-    }
-    .container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      max-width: 1000px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
     .card {
-      background: white;
-      border-radius: 12px;
-      padding: 25px;
+      background: #fff;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
       text-align: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      transition: transform 0.2s;
+      max-width: 400px;
     }
-    .card:hover {
-      transform: translateY(-5px);
+    h1 {
+      margin-bottom: 10px;
+      color: #111;
     }
-    .card h2 {
-      margin: 0 0 10px;
-      font-size: 1.5rem;
-      color: #0088cc;
-    }
-    .price {
-      font-size: 1.8rem;
-      font-weight: bold;
-      margin: 10px 0 20px;
-    }
-    .card ul {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 20px;
-      text-align: left;
-    }
-    .card ul li {
-      margin: 8px 0;
-      padding-left: 18px;
-      position: relative;
-    }
-    .card ul li::before {
-      content: "✔";
-      position: absolute;
-      left: 0;
-      color: #0088cc;
-      font-weight: bold;
+    p {
+      margin-bottom: 20px;
     }
     .btn {
       display: inline-block;
-      background: #0088cc;
+      padding: 15px 25px;
+      font-size: 18px;
+      background: #0070ba;
       color: white;
+      border-radius: 12px;
       text-decoration: none;
-      padding: 12px 20px;
-      border-radius: 8px;
       font-weight: bold;
-      transition: background 0.2s;
+      transition: 0.2s;
     }
     .btn:hover {
-      background: #006699;
+      background: #005a99;
     }
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #fff;
-      margin-top: 40px;
-      font-size: 0.9rem;
-      color: #666;
+    .note {
+      margin-top: 15px;
+      font-size: 14px;
+      color: #555;
     }
-    .lang { display: none; }
   </style>
 </head>
 <body>
-  <header>
-    <h1 class="lang ru">ResumeBot — Создай резюме легко</h1>
-    <h1 class="lang lt">ResumeBot — Sukurkite CV lengvai</h1>
-    <h1 class="lang en">ResumeBot — Create your CV easily</h1>
-    <div class="lang-switch">
-      <button onclick="setLang('ru')">RU</button>
-      <button onclick="setLang('lt')">LT</button>
-      <button onclick="setLang('en')">EN</button>
-    </div>
-  </header>
-
-  <div class="container">
-    <!-- Бесплатный тариф -->
-    <div class="card">
-      <h2 class="lang ru">Бесплатно</h2>
-      <h2 class="lang lt">Nemokamai</h2>
-      <h2 class="lang en">Free</h2>
-      <div class="price">0€</div>
-      <ul>
-        <li class="lang ru">Черновик резюме</li>
-        <li class="lang lt">CV juodraštis</li>
-        <li class="lang en">Draft CV</li>
-        <li class="lang ru">Telegram-бот</li>
-        <li class="lang lt">Telegram botas</li>
-        <li class="lang en">Telegram bot</li>
-      </ul>
-      <a href="https://t.me/ResumeBot" class="btn lang ru">Попробовать</a>
-      <a href="https://t.me/ResumeBot" class="btn lang lt">Išbandyti</a>
-      <a href="https://t.me/ResumeBot" class="btn lang en">Try</a>
-    </div>
-
-    <!-- Стандарт -->
-    <div class="card">
-      <h2 class="lang ru">Стандарт</h2>
-      <h2 class="lang lt">Standartas</h2>
-      <h2 class="lang en">Standard</h2>
-      <div class="price">5€</div>
-      <ul>
-        <li class="lang ru">Готовое PDF-резюме</li>
-        <li class="lang lt">Paruoštas PDF CV</li>
-        <li class="lang en">Ready PDF CV</li>
-        <li class="lang ru">Современный дизайн</li>
-        <li class="lang lt">Šiuolaikinis dizainas</li>
-        <li class="lang en">Modern design</li>
-      </ul>
-      <a href="https://paypal.me/chetresky/5" class="btn lang ru">Купить</a>
-      <a href="https://paypal.me/chetresky/5" class="btn lang lt">Pirkti</a>
-      <a href="https://paypal.me/chetresky/5" class="btn lang en">Buy</a>
-    </div>
-
-    <!-- Плюс -->
-    <div class="card">
-      <h2 class="lang ru">Плюс</h2>
-      <h2 class="lang lt">Pliusas</h2>
-      <h2 class="lang en">Plus</h2>
-      <div class="price">15€</div>
-      <ul>
-        <li class="lang ru">Профессиональное оформление</li>
-        <li class="lang lt">Profesionalus dizainas</li>
-        <li class="lang en">Professional design</li>
-        <li class="lang ru">Перевод (RU/LT/EN)</li>
-        <li class="lang lt">Vertimas (RU/LT/EN)</li>
-        <li class="lang en">Translation (RU/LT/EN)</li>
-        <li class="lang ru">Индивидуальные советы</li>
-        <li class="lang lt">Asmeniniai patarimai</li>
-        <li class="lang en">Personal tips</li>
-      </ul>
-      <a href="https://paypal.me/chetresky/15" class="btn lang ru">Купить</a>
-      <a href="https://paypal.me/chetresky/15" class="btn lang lt">Pirkti</a>
-      <a href="https://paypal.me/chetresky/15" class="btn lang en">Buy</a>
-    </div>
+  <div class="card">
+    <h1>ResumeBot</h1>
+    <p>Сделайте профессиональное резюме всего за <b>5 €</b>.</p>
+    <a href="https://paypal.me/chetresky/5" class="btn">Оплатить 5 €</a>
+    <p class="note">После оплаты вернитесь в Telegram-бота: <br> <a href="https://t.me/YourBot">Открыть бота</a></p>
   </div>
-
-  <footer>
-    <p class="lang ru">Связь: <a href="mailto:resky.sup01@gmail.com">resky.sup01@gmail.com</a></p>
-    <p class="lang lt">Kontaktai: <a href="mailto:resky.sup01@gmail.com">resky.sup01@gmail.com</a></p>
-    <p class="lang en">Contact: <a href="mailto:resky.sup01@gmail.com">resky.sup01@gmail.com</a></p>
-  </footer>
-
-  <script>
-    function setLang(lang) {
-      document.querySelectorAll('.lang').forEach(el => {
-        el.style.display = el.classList.contains(lang) ? '' : 'none';
-      });
-      localStorage.setItem("lang", lang);
-    }
-    const lang = localStorage.getItem("lang") || "ru";
-    setLang(lang);
-  </script>
 </body>
 </html>
-

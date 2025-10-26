@@ -1,0 +1,15 @@
+[project]
+name = "resumebot"
+version = "0.1.0"
+description = "Telegram bot for generating resumes"
+authors = ["Emil Sky <resky.sup01@gmail.com>"]
+requires-python = ">=3.11"
+dependencies = [
+  "pytelegrambotapi",
+  "gspread",
+  "oauth2client",
+  "reportlab",
+  "python-dotenv",
+  "google-auth>=2.41.1",
+  "requests>=2.32.5",
+]

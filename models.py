@@ -1,15 +1,23 @@
+import os
+import datetime
 from sqlalchemy import (
     create_engine, Column, Integer, String, Text, Boolean, ForeignKey, DateTime
 )
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker, relationship
-import datetime
-from config import DATABASE_URL
+from sqlalchemy.orm import declarative_base, sessionmaker, relationship
+
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+if not DATABASE_URL:
+    raise RuntimeError("DATABASE_URL is not set")
 
 Base = declarative_base()
 
-# Engine and session
-engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False} if DATABASE_URL.startswith("sqlite") else {})
+engine = create_engine(
+    DATABASE_URL,
+    connect_args={"check_same_thread": False}
+    if DATABASE_URL.startswith("sqlite") else {}
+)
+
 SessionLocal = sessionmaker(bind=engine)
 
 class User(Base):
@@ -40,7 +48,7 @@ class Employer(Base):
     id = Column(Integer, primary_key=True, index=True)
     company_name = Column(String)
     email = Column(String)
-    plan = Column(String, default="free")  # starter/pro/enterprise
+    plan = Column(String, default="free")
     api_key = Column(String, unique=True, index=True)
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
 

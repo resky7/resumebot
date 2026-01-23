@@ -1,5 +1,6 @@
 import os
 import uuid
+
 from translations import translations
 from config import BOT_TOKEN, UPLOAD_FOLDER
 from models import SessionLocal, init_db, User, Resume
@@ -140,12 +141,10 @@ def handle_consent(message):
     lang = _get_lang_for_chat(message.chat.id)
     state = flow_state[message.chat.id]
 
-    positive = message.text.strip().lower() in [
-        "да", "yes", "y", "taip", "t"
-    ]
+    positive = message.text.strip().lower() in ["да", "yes", "y", "taip", "t"]
 
     db = SessionLocal()
-    resume = db.query(Resume).get(state["resume_id"])
+    resume = db.get(Resume, state["resume_id"])
     resume.consent_for_employers = positive
     db.commit()
 
@@ -183,4 +182,59 @@ def generate_pdf_and_save(resume, lang="ru"):
     labels = {
         "ru": ["Имя", "Город", "Позиция", "Опыт", "Образование", "Навыки"],
         "en": ["Name", "City", "Position", "Experience", "Education", "Skills"],
-        "lt": ["Vardas", "Miestas", "Pareigos", "Patir]()
+        "lt": ["Vardas", "Miestas", "Pareigos", "Patirtis", "Išsilavinimas", "Įgūdžiai"]
+    }
+
+    values = [
+        resume.name or "",
+        resume.city or "",
+        resume.position or "",
+        resume.experience or "",
+        resume.education or "",
+        resume.skills or ""
+    ]
+
+    c.setFont("DejaVu", 18)
+    c.drawCentredString(300, 820, titles.get(lang, "RESUME"))
+
+    c.setFont("DejaVu", 12)
+    y = 780
+
+    for label, value in zip(labels.get(lang, labels["ru"]), values):
+        c.drawString(60, y, f"{label}: {value}")
+        y -= 22
+
+    if not resume.consent_for_employers:
+        c.setFont("DejaVu", 36)
+        c.setFillGray(0.85)
+        c.drawCentredString(300, 400, "DEMO VERSION")
+
+    c.save()
+    return path
+
+# ================= HELPERS =================
+
+def _get_step(chat_id):
+    state = flow_state.get(chat_id)
+    if isinstance(state, dict):
+        return state.get("step")
+    return state
+
+def _save_field_and_ask_next(message, field, next_step):
+    lang = _get_lang_for_chat(message.chat.id)
+    state = flow_state[message.chat.id]
+
+    db = SessionLocal()
+    resume = db.get(Resume, state["resume_id"])
+    setattr(resume, field, message.text)
+    db.commit()
+    db.close()
+
+    state["step"] = next_step
+    bot.send_message(message.chat.id, t(next_step, lang))
+
+# ================= RUN =================
+
+if __name__ == "__main__":
+    print("ResumeBot is running ✅")
+    bot.polling(none_stop=True, interval=1, timeout=30)

@@ -203,4 +203,71 @@ def handle_consent(message):
     db.commit()
 
     pdf_path = generate_pdf_and_save(resume, lang)
-    resume.pdf_path =_
+    resume.pdf_path = pdf_path
+    db.commit()
+    db.close()
+
+    flow_state.pop(message.chat.id, None)
+
+    with open(pdf_path, "rb") as f:
+        bot.send_document(message.chat.id, f)
+
+    bot.send_message(message.chat.id, t("resume_ready", lang))
+    bot.send_message(message.chat.id, t("thanks", lang))
+    bot.send_message(
+        message.chat.id,
+        t("upgrade_offer", lang) + f"\n👉 {PAYPAL_URL}"
+    )
+
+# ================= PDF =================
+
+def generate_pdf_and_save(resume, lang="ru"):
+    filename = f"{uuid.uuid4().hex}.pdf"
+    path = os.path.join(UPLOAD_FOLDER, filename)
+
+    c = canvas.Canvas(path, pagesize=A4)
+    c.setFont("DejaVu", 12)
+
+    titles = {
+        "ru": "РЕЗЮМЕ",
+        "en": "RESUME",
+        "lt": "GYVENIMO APRAŠYMAS"
+    }
+
+    labels = {
+        "ru": ["Имя", "Город", "Позиция", "Опыт", "Образование", "Навыки"],
+        "en": ["Name", "City", "Position", "Experience", "Education", "Skills"],
+        "lt": ["Vardas", "Miestas", "Pareigos", "Patirtis", "Išsilavinimas", "Įgūdžiai"]
+    }
+
+    c.setFont("DejaVu", 18)
+    c.drawString(200, 820, titles.get(lang, "RESUME"))
+    c.setFont("DejaVu", 12)
+
+    y = 780
+    values = [
+        resume.name,
+        resume.city,
+        resume.position,
+        resume.experience,
+        resume.education,
+        resume.skills
+    ]
+
+    for label, value in zip(labels[lang], values):
+        c.drawString(60, y, f"{label}: {value or ''}")
+        y -= 24
+
+    if not resume.consent_for_employers:
+        c.setFont("DejaVu", 36)
+        c.setFillGray(0.85)
+        c.drawString(120, 400, "DEMO VERSION")
+
+    c.save()
+    return path
+
+# ================= RUN =================
+
+if __name__ == "__main__":
+    print("ResumeBot is running")
+    bot.polling(none_stop=True)

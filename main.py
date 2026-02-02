@@ -1,28 +1,30 @@
 import os
 import uuid
+from datetime import datetime
 
-from translations import translations
-from config import (
-    BOT_TOKEN,
-    UPLOAD_FOLDER,
-    FONT_PATH,
-    PAYPAL_URL
-)
-
-from models import SessionLocal, init_db, User, Resume
+import telebot
+from telebot import types
 
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 
-import telebot
-from telebot import types
+from config import (
+    BOT_TOKEN,
+    UPLOAD_FOLDER,
+    FONT_PATH,
+    PAYPAL_URL,
+    SHEET_NAME
+)
+
+from translations import translations
+from models import SessionLocal, init_db, User, Resume
+from google_sheets_helper import get_google_sheets_client
 
 # ================= SETUP =================
 
-if not os.path.exists(UPLOAD_FOLDER):
-    os.makedirs(UPLOAD_FOLDER)
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 if not os.path.exists(FONT_PATH):
     raise FileNotFoundError(f"Font not found: {FONT_PATH}")
@@ -33,7 +35,7 @@ init_db()
 
 bot = telebot.TeleBot(BOT_TOKEN)
 
-flow_state = {}  # chat_id -> dict(step, resume_id)
+flow_state = {}  # chat_id -> {step, resume_id, lang}
 
 # ================= TRANSLATIONS =================
 
@@ -63,6 +65,10 @@ def get_or_create_user(db, telegram_id, lang="ru"):
 
 
 def _get_lang_for_chat(chat_id):
+    state = flow_state.get(chat_id)
+    if isinstance(state, dict) and "lang" in state:
+        return state["lang"]
+
     db = SessionLocal()
     user = db.query(User).filter(
         User.telegram_id == str(chat_id)
@@ -78,6 +84,24 @@ def _get_step(chat_id):
         return state.get("step")
     return state
 
+# ================= GOOGLE SHEETS =================
+
+def save_resume_to_google_sheets(resume, lang):
+    client = get_google_sheets_client()
+    sheet = client.open(SHEET_NAME).sheet1
+
+    sheet.append_row([
+        resume.id,
+        resume.name,
+        resume.city,
+        resume.position,
+        resume.experience,
+        resume.education,
+        resume.skills,
+        lang,
+        "YES" if resume.consent_for_employers else "NO",
+        datetime.now().strftime("%Y-%m-%d %H:%M")
+    ])
 
 # ================= COMMANDS =================
 
@@ -97,11 +121,21 @@ def cmd_start(message):
         t("choose_language", "ru"),
         reply_markup=keyboard
     )
-    flow_state[message.chat.id] = "choose_language"
+    flow_state[message.chat.id] = {"step": "choose_language"}
 
+
+@bot.message_handler(commands=["upgrade"])
+def cmd_upgrade(message):
+    lang = _get_lang_for_chat(message.chat.id)
+    bot.send_message(
+        message.chat.id,
+        t("upgrade_offer", lang) + f"\n👉 {PAYPAL_URL}"
+    )
+
+# ================= LANGUAGE =================
 
 @bot.message_handler(
-    func=lambda m: flow_state.get(m.chat.id) == "choose_language"
+    func=lambda m: _get_step(m.chat.id) == "choose_language"
 )
 def handle_choose_language(message):
     text = message.text.lower()
@@ -116,7 +150,11 @@ def handle_choose_language(message):
     get_or_create_user(db, message.chat.id, lang)
     db.close()
 
-    flow_state[message.chat.id] = {"step": "ask_name"}
+    flow_state[message.chat.id] = {
+        "step": "ask_name",
+        "lang": lang
+    }
+
     bot.send_message(
         message.chat.id,
         t("start_name", lang),
@@ -128,9 +166,10 @@ def handle_choose_language(message):
 @bot.message_handler(func=lambda m: _get_step(m.chat.id) == "ask_name")
 def handle_name(message):
     lang = _get_lang_for_chat(message.chat.id)
-    db = SessionLocal()
 
+    db = SessionLocal()
     user = get_or_create_user(db, message.chat.id, lang)
+
     resume = Resume(
         user_id=user.id,
         name=message.text
@@ -141,10 +180,10 @@ def handle_name(message):
     db.refresh(resume)
     db.close()
 
-    flow_state[message.chat.id] = {
+    flow_state[message.chat.id].update({
         "step": "ask_city",
         "resume_id": resume.id
-    }
+    })
 
     bot.send_message(message.chat.id, t("ask_city", lang))
 
@@ -202,6 +241,8 @@ def handle_consent(message):
     resume.consent_for_employers = positive
     db.commit()
 
+    save_resume_to_google_sheets(resume, lang)
+
     pdf_path = generate_pdf_and_save(resume, lang)
     resume.pdf_path = pdf_path
     db.commit()
@@ -213,7 +254,6 @@ def handle_consent(message):
         bot.send_document(message.chat.id, f)
 
     bot.send_message(message.chat.id, t("resume_ready", lang))
-    bot.send_message(message.chat.id, t("thanks", lang))
     bot.send_message(
         message.chat.id,
         t("upgrade_offer", lang) + f"\n👉 {PAYPAL_URL}"

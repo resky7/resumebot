@@ -3,43 +3,26 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# ================= BASIC =================
-
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 
-if not BOT_TOKEN:
-    raise RuntimeError("BOT_TOKEN is not set")
-
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
-# ================= DATABASE =================
+SHEET_NAME = os.getenv("SHEET_NAME", "ResumeBot_Data")
 
 DATABASE_URL = os.getenv(
     "DATABASE_URL",
     "sqlite:///./resumebot.db"
 )
 
-# ================= ADMIN =================
-
 ADMIN_API_KEY = os.getenv(
     "ADMIN_API_KEY",
     "change_this_to_strong_key"
 )
 
-# ================= PATHS =================
+UPLOAD_FOLDER = os.getenv("UPLOAD_FOLDER", "./uploads")
 
-UPLOAD_FOLDER = os.getenv(
-    "UPLOAD_FOLDER",
-    os.path.join(BASE_DIR, "uploads")
+FONT_PATH = os.getenv(
+    "FONT_PATH",
+    "./fonts/DejaVuSans.ttf"
 )
-
-FONT_PATH = os.path.join(
-    BASE_DIR,
-    "fonts",
-    "DejaVuSans.ttf"
-)
-
-# ================= BUSINESS =================
 
 PAYPAL_URL = "https://paypal.me/chetresky/15"
 
@@ -50,6 +33,6 @@ TARIFFS = {
     },
     "plus": {
         "price": 15,
-        "desc": "Премиум PDF без водяного знака"
+        "desc": "Премиум PDF с профессиональным дизайном"
     }
 }
